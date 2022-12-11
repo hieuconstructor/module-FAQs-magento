@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <script src="Bss_Faqs::js/js-question.js" />
+    </head>
+    <referenceBlock name="page.main.title" remove="true"/>
+    <referenceContainer name="content">
+        <block class="Bss\Faqs\Block\Question\Question" name="faqs.question.view" template="Bss_Faqs::question/view.phtml"/>
+    </referenceContainer>
+    <referenceContainer name="sidebar.main">
+        <block class="Bss\Faqs\Block\CategoryFaq\CategorySidebar" name="faq.category.sidebar" template="Bss_Faqs::category/categorySidebar.phtml"/>
+    </referenceContainer>
+</page>

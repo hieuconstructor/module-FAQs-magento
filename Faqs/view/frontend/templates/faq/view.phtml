@@ -1,0 +1,56 @@
+<div class="faq-category">
+    <h2 class="faqcat-title first-title"><i></i><?php echo __('Welcome to our support portal');?></h2>
+    <?php if ($this->getFaqCategoriesList()): ?>
+        <ul class="category-list">
+            <?php foreach ($this->getFaqCategoriesList() as $category): ?>
+                <li class="col-xs-6 col-sm-4 col-md-3 category">
+                    <div class="block">
+                        <a href="<?php echo $category['id'] ?>">
+                            <img src="<?php echo !empty($category['image']) ? $this->getFileBaseUrl($category['image']) : $block->getViewFileUrl('Bss_Faqs::images/faq81x81.png'); ?>" alt="<?php echo __($category['title']);?>" title="<?php echo __($category['title']);?> - <?php echo __('FAQs'); ?>"" />
+                        </a>
+                        <h3>
+                            <a href="#">
+                                <?php echo __($category['name']);?>
+                            </a>
+                        </h3>
+                    </div>
+                </li>
+            <?php endforeach;?>
+        </ul>
+    <?php else: ?>
+        <ol class="items faqs-list">
+            <li class="item no-question">
+                <a href="#"><?php echo __('There are no FAQ Categories was found.'); ?></a>
+            </li>
+        </ol>
+    <?php endif; ?>
+
+    <?php foreach($this->getFaqCategoriesList() as $category): ?>
+        <h2 class="faqcat-title">
+            <i></i><?php echo __($category['name']);?>
+        </h2>
+        <?php if ($this->getFaqsList()): ?>
+            <ol class="items faqs-list">
+                <?php foreach($this->getFaqsList() as $faq): ?>
+                    <?php if ($category['id'] == $faq['category_id']): ?>
+                        <li class="item" id="faq-id-<?php echo $faq['id']; ?>">
+                            <a href="<?php ?>">
+                                <span class="faq-iconplus"></span><?php echo $faq['title']; ?>
+                            </a>
+                            <div class="description" id="description">
+                                <?php echo $faq['content']; ?>
+                            </div>
+                            <div class="read-more"><?php echo __('Read more'); ?></div>
+                        </li>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </ol>
+        <?php else: ?>
+            <ol class="items faqs-list">
+                <li class="item no-question">
+                    <a href="#"><?php echo __('There are no FAQs was found.'); ?></a>
+                </li>
+            </ol>
+        <?php endif; ?>
+    <?php endforeach; ?>
+</div>

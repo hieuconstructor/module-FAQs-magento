@@ -1,0 +1,36 @@
+{
+    "faq": {
+        "column": {
+            "id": true,
+            "title": true,
+            "content": true,
+            "status": true,
+            "viewed": true,
+            "liked": true,
+            "disliked": true,
+            "created_at": true,
+            "updated_at": true,
+            "create_by": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "faq_cat": {
+        "column": {
+            "id": true,
+            "name": true,
+            "status": true,
+            "image": true,
+            "created_at": true,
+            "updated_at": true,
+            "created_by": true
+        },
+        "index": {
+            "FAQ_CAT_NAME": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

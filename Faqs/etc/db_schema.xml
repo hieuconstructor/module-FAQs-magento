@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="faq" resource="default" engine="innodb" comment="Faq Table">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Faq Id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <column name="title" nullable="false" xsi:type="varchar" comment="Title" default="title" length="255"/>
+        <column name="content" nullable="false" xsi:type="text" comment="Content"/>
+        <column name="status" nullable="false" xsi:type="smallint" comment="Status" default="1" identity="false" unsigned="true"/>
+        <column name="viewed" nullable="false" xsi:type="int" comment="Viewed" default="0" identity="false" unsigned="true"/>
+        <column name="liked" nullable="false" xsi:type="int" comment="Liked" default="0" identity="false" unsigned="true"/>
+        <column name="disliked" nullable="false" xsi:type="int" comment="Disliked" default="0" identity="false" unsigned="true"/>
+        <column name="created_at" nullable="false" xsi:type="timestamp" comment="Create At" default="CURRENT_TIMESTAMP"/>
+        <column name="updated_at" nullable="false" xsi:type="timestamp" comment="Updated At" default="CURRENT_TIMESTAMP" on_update="true"/>
+        <column name="created_by" nullable="false" xsi:type="varchar" comment="Create by" default="admin" length="255"/>
+        <column name="category_id" nullable="false" xsi:type="int" comment="Category id" identity="false" unsigned="true"/>
+        <index referenceId="INDEX_TYPE_FULLTEXT" indexType="fulltext">
+            <column name="title"/>
+        </index>
+        <constraint xsi:type="foreign" referenceId="FAQ_ID_FAQ_CAT_ID"
+                    table="faq" column="category_id"
+                    referenceTable="faq_cat" referenceColumn="id" onDelete="CASCADE"/>
+    </table>
+    <table name="faq_cat" resource="default" engine="innodb" comment="Category Faq Table">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Category Id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <column name="name" nullable="false" xsi:type="varchar" comment="Tittle" default="tittle" length="255"/>
+        <column name="status" nullable="false" xsi:type="smallint" comment="Status" default="1" identity="false" unsigned="true"/>
+        <column name="image" nullable="true" xsi:type="text" comment="Image" />
+        <column name="created_at" nullable="false" xsi:type="timestamp" comment="Created At" default="CURRENT_TIMESTAMP"/>
+        <column name="updated_at" nullable="false" xsi:type="timestamp" comment="Updated At" default="CURRENT_TIMESTAMP" on_update="true"/>
+        <column name="created_by" nullable="false" xsi:type="varchar" comment="Created By" default="admin" length="255"/>
+        <index referenceId="INDEX_TYPE_FULLTEXT" indexType="fulltext">
+            <column name="name"/>
+        </index>
+    </table>
+</schema>

@@ -1,0 +1,191 @@
+<?xml version="1.0" ?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">bss_faqs_faq_listing.bss_faqs_faq_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>bss_faqs_faq_columns</spinner>
+        <deps>
+            <dep>bss_faqs_faq_listing.bss_faqs_faq_listing_data_source</dep>
+        </deps>
+        <buttons>
+            <button name="add">
+                <url path="*/*/edit"/>
+                <class>primary</class>
+                <label translate="true">Add new Faq</label>
+            </button>
+        </buttons>
+    </settings>
+    <dataSource name="bss_faqs_faq_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <dataProvider name="bss_faqs_faq_listing_data_source" class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <filterSearch name="fulltext"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters"/>
+        <massaction name="listing_massaction" component="Magento_Ui/js/grid/tree-massactions">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to delete the selected Faq?</message>
+                        <title translate="true">Delete items</title>
+                    </confirm>
+                    <url path="faqs/faq/massdelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+            <action name="disable">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to disable the selected Faq?</message>
+                        <title translate="true">Disable items</title>
+                    </confirm>
+                    <url path="faqs/faq/massdisable"/>
+                    <type>disable</type>
+                    <label translate="true">Disable</label>
+                </settings>
+            </action>
+            <action name="enable">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to enable the selected Faq?</message>
+                        <title translate="true">Enable items</title>
+                    </confirm>
+                    <url path="faqs/faq/massenable"/>
+                    <type>enable</type>
+                    <label translate="true">Enable</label>
+                </settings>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="bss_faqs_faq_columns">
+        <settings>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">bss_faqs_faq_listing.bss_faqs_faq_listing.bss_faqs_faq_columns_editor</item>
+                    <item name="target" xsi:type="string">startEdit</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">faq</item>
+                        <item name="1" xsi:type="boolean">true</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="id">
+            <settings>
+                <filter>text</filter>
+                <sorting>asc</sorting>
+                <label translate="true">ID</label>
+            </settings>
+        </column>
+        <column name="title">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Title</label>
+                <editor>
+                    <editorType>text</editorType>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">false</rule>
+                    </validation>
+                </editor>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Bss\Faqs\Ui\Component\Listing\Column\FaqActions">
+            <settings>
+                <indexField>id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>107</resizeDefaultWidth>
+            </settings>
+        </actionsColumn>
+        <column name="content">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Content</label>
+                <editor>
+                    <editorType>text</editorType>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">false</rule>
+                    </validation>
+                </editor>
+            </settings>
+        </column>
+        <column name="status" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Bss\Faqs\Model\Faq\Options\Status"/>
+                <dataType>select</dataType>
+                <filter>text</filter>
+                <sortable>true</sortable>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+        <column name="viewed">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Viewed</label>
+            </settings>
+        </column>
+        <column name="liked">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Liked</label>
+            </settings>
+        </column>
+        <column name="disliked">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Disliked</label>
+            </settings>
+        </column>
+        <column name="created_at">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Created At</label>
+            </settings>
+        </column>
+        <column name="updated_at">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Updated At</label>
+            </settings>
+        </column>
+        <column name="created_by">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Create By</label>
+            </settings>
+        </column>
+        <column name="category_id" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Bss\Faqs\Model\Faq\Options\CategorySelect"/>
+                <dataType>select</dataType>
+                <filter>text</filter>
+                <sortable>true</sortable>
+                <label translate="true">Category</label>
+            </settings>
+        </column>
+    </columns>
+</listing>

@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!--Declare the faq_cat,faq collection class, table and resourceModel for the faq_cat -->
+    <preference for="Bss\Faqs\Api\CategoryFaqRepositoryInterface" type="Bss\Faqs\Model\CategoryFaqRepository"/>
+    <preference for="Bss\Faqs\Api\Data\CategoryFaqInterface" type="Bss\Faqs\Model\CategoryFaq"/>
+    <preference for="Bss\Faqs\Api\Data\CategoryFaqSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <virtualType name="Bss\Faqs\Model\ResourceModel\Faq\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">faq</argument>
+            <argument name="resourceModel" xsi:type="string">Bss\Faqs\Model\ResourceModel\Faq\Collection</argument>
+        </arguments>
+    </virtualType>
+    <preference for="Bss\Faqs\Api\FaqRepositoryInterface" type="Bss\Faqs\Model\FaqRepository"/>
+    <preference for="Bss\Faqs\Api\Data\FaqInterface" type="Bss\Faqs\Model\Faq"/>
+    <preference for="Bss\Faqs\Api\Data\FaqSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="bss_faqs_faq_listing_data_source" xsi:type="string">Bss\Faqs\Model\ResourceModel\Faq\Grid\Collection</item>
+                <item name="bss_faqs_categoryfaq_listing_data_source" xsi:type="string">Bss\Faqs\Model\ResourceModel\CategoryFaq\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Bss\Faqs\Model\ResourceModel\CategoryFaq\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">faq_cat</argument>
+            <argument name="resourceModel" xsi:type="string">Bss\Faqs\Model\ResourceModel\CategoryFaq\Collection</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Bss\Faqs\CategoryImageUpload" type="Bss\Faqs\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">faqs/tmp/categoryFaq</argument>
+            <argument name="basePath" xsi:type="string">faqs/categoryFaq</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+            <argument name="allowedMimeTypes" xsi:type="array">
+                <item name="jpg" xsi:type="string">image/jpg</item>
+                <item name="jpeg" xsi:type="string">image/jpeg</item>
+                <item name="gif" xsi:type="string">image/gif</item>
+                <item name="png" xsi:type="string">image/png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Bss\Faqs\Controller\Adminhtml\CategoryFaq\Image\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Bss\Faqs\CategoryImageUpload</argument>
+        </arguments>
+    </type>
+    <!--End declare -->
+</config>
